@@ -57,7 +57,7 @@ SUBROUTINE init_parallel_pdaf(dim_ens, screen)
 
    USE mpi                         ! MPI
    USE mod_parallel_pdaf, &        ! PDAF Parallelization variables
-        ONLY: mype_world, npes_world, mype_model, npes_model, &
+        ONLY: mype_world, npes_world, mype_model, npes_model, filt_type, &
         COMM_model, mype_filter, npes_filter, COMM_filter, filterpe, &
         n_modeltasks, local_npes_model, task_id, COMM_couple, MPIerr
    USE parser, &
@@ -96,6 +96,8 @@ SUBROUTINE init_parallel_pdaf(dim_ens, screen)
  
    handle = 'dim_ens'
    CALL parse(handle, n_modeltasks)
+   handle = 'filt_type'
+   call parse(handle, filt_type)
 
    ! *** Initialize communicators for ensemble evaluations ***
    IF (mype_world == 0) &

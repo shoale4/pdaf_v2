@@ -30,6 +30,7 @@ MODULE mod_parallel_pdaf
 
   ! Additional variables for use with PDAF
   INTEGER :: n_modeltasks = 1         !< Number of parallel model tasks
+  integer :: filt_type              ! new sb 1/11/24 - adding so we can change filter type from command line
   INTEGER :: n_filterpes  = 1         !< Number of PEs for filter analysis
   INTEGER :: npes_world               !< Number of processes in MPI_COMM_WORLD
   INTEGER :: mype_world               !< Process rank in MPI_COMM_WORLD

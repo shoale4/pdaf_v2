@@ -87,7 +87,7 @@ SUBROUTINE prepoststep_ens_pdaf(step, dim_p, dim_ens, dim_ens_p, dim_obs_p, &
 
   ! new sb 1/9/24
   CHARACTER(len=32) :: handle  ! new sb 1/9/24 -- for command line parsing, finally adding it!
-  character(len=32) :: obs_type
+  character(len=32) :: exp_var_spec
   character(len=32) :: exp_type
   integer :: mod_error_option
   character(len=32) :: mod_error_str
@@ -321,10 +321,16 @@ end if
   handle = 'filter_type'
   call parse(handle, filter_type)
   handle = 'obs_type'
-  call parse(handle, obs_type)
+  call parse(handle, exp_var_spec)
 
+  ! sb 1/11/24
+  ! filter type is estkf, lestkf, etc
+  ! exp_type is obs_spacing, diff_ass_interval, diff_filter, etc 
+  ! exp_var_type - experimental variable specification
+  ! exp_var_type is uniform2 (uniform, obs every 2 GPs), uniform4, left_half, bottom_half, etc for diff_obs
+  ! exp_var_type is 5, 10, 15, etc for diff_ass_interval, etc, etc, so on, so forth 
   filename = 'results/for_elizabeth/jan_2024/rmserror_'//TRIM(filter_type)//'_'// &
-             TRIM(exp_type)//'_'//TRIM(obs_type)//'.txt'
+             TRIM(exp_type)//'_'//TRIM(exp_var_spec)//'.txt'
 
   !!!!!!!! rmse  !!!!!!!!!!!
   ! new sb 1/9/24
@@ -343,7 +349,7 @@ end if
 
   ! new sb 1/9/24
   filename = 'results/for_elizabeth/jan_2024/spread_'//TRIM(filter_type)//'_'// &
-             TRIM(exp_type)//'_'//TRIM(obs_type)//'.txt'
+             TRIM(exp_type)//'_'//TRIM(exp_var_spec)//'.txt'
 
   ! spread 
   OPEN(11, file = TRIM(filename)) ! new sb 1/9/24

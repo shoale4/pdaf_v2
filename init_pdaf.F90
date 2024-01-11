@@ -22,7 +22,7 @@ SUBROUTINE init_pdaf()
   USE mod_model, &                ! Model variables
        ONLY: nx, ny, total_steps, dt, step_null
   USE mod_parallel_pdaf, &        ! Parallelization variables
-       ONLY: mype_world, n_modeltasks, task_id, &
+       ONLY: mype_world, n_modeltasks, task_id, filt_type, &
        COMM_model, COMM_filter, COMM_couple, filterpe, abort_parallel
   USE mod_assimilation, &         ! Variables for assimilation
        ONLY: dim_state_p, screen, filtertype, subtype, dim_ens, &
@@ -72,7 +72,7 @@ SUBROUTINE init_pdaf()
   screen      = 2  ! Write screen output (1) for output, (2) add timings
 
 ! *** Filter specific variables
-  filtertype = 6    ! Type of filter
+  filtertype = filt_type    ! Type of filter
                     !   (1) SEIK
                     !   (2) EnKF
                     !   (3) LSEIK

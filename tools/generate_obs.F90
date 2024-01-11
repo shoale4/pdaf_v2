@@ -96,7 +96,7 @@ program obs_prog
   	real(8), allocatable :: state(:)
   	integer :: nx = 200
   	real(8), allocatable :: state_reshaped(:,:), observations(:,:)
-  	integer :: obs_spacing = 2
+  	integer :: obs_spacing
 	integer :: delt_obs = 5
 	integer :: obs_choice
 	integer :: add_noise
@@ -218,9 +218,12 @@ program obs_prog
 		! 5 for top/bottom
 		! set add_noise to 0 to run with no noise and 1 to add noise to observations
 		add_noise = 1
+		! new sb 1/9/24
 		! obs_choice = 1
 		handle = 'obs_choice'
 		call parse(handle, obs_choice)
+		handle = 'obs_spacing'
+		call parse(handle, obs_spacing)
 
 		if (add_noise == 0) then
 			noise(:) = 0
