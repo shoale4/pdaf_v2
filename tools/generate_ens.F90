@@ -173,6 +173,7 @@ program ens_prog
 		stat(1) = NF90_GET_VAR(file_id_in, state_id, state, start=start_v, count=count_v)
 		if (stat(1) /= NF90_noerr) then
 			write (*,*) "ERROR READING STATE FILE" 
+			write (*,*) stat(1)
 		end if		
 
 
@@ -202,6 +203,7 @@ program ens_prog
 		! stat(1) = NF90_PUT_VAR(file_id_out, ens_id, state)
 		if (stat(1) /= NF90_noerr) then
 			write (*,*) "ERROR WRITING ENSEMBLE FILE" 
+			write (*,*) stat(1)
 		end if
 		! print *, count_v
 		cnt = cnt + 1
