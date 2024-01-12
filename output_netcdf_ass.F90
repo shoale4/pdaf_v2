@@ -59,7 +59,7 @@ module output_netcdf_ass
         stat(j) = nf90_create(trim(ass_file), 0, file_id)
         j = j + 1
 
-        attstr = "Assimilation output for MS model"
+        attstr = "Assimilation output for mMS model"
         stat(j) = nf90_put_att(file_id, nf90_global, 'title', trim(attstr))
         j = j + 1
 

@@ -160,11 +160,15 @@ program ens_prog
   	allocate(state(dim))
   	allocate(noise(dim))
 
+  	! write (*,*) "Variable ID for 'state' in output file:", state_id
+	! write (*,*) "Variable ID for 'ens' in output file:", ens_id
+
+
   	write (*,*) "Start ensemble generation"
   	write (*,*) nsteps
 
   	cnt = 1
-  	loop: do iter = 2, nsteps-2, (nsteps-2)/ens_size
+  	loop: do iter = 2, nsteps-1, (nsteps-1)/(ens_size)
  		! read state vector
 		start_v(2) = iter
 		count_v(2) = 1
@@ -216,6 +220,7 @@ program ens_prog
 	stat(j) = NF90_CLOSE(file_id_in)
 	j = j + 1
 	stat(j) = NF90_CLOSE(file_id_out)
+
 
 	deallocate(state)
 
