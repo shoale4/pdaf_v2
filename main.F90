@@ -24,8 +24,8 @@ PROGRAM MAIN
 ! ********************************
 
   ! *** Initial Screen output ***
-  WRITE (*, '(/17x, a/)') '+++++ PDAF tutorial - online mode +++++'
-  WRITE (*, '(16x, a)') 'Tutorial: 2D model without parallelization'
+  WRITE (*, '(/17x, a/)') '+++++ PDAF: Modified by Shoale Badr for Cardiac Data Assimilation +++++'
+  WRITE (*, '(16x, a)') '2-D Modified Mitchell-Schaefer Model: Synthetic Data Creation and Spinup Phase'
   WRITE (*, '(/)')
      
   ! *** Initialize model ***

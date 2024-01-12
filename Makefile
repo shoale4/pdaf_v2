@@ -35,7 +35,7 @@ MODULES =  	mod_model.o \
 			parser_no_mpi.o
 
 # Model routines
-OBJ_MODEL =	main_pdaf.o\
+OBJ_MODEL =	main.o\
 		initialize.o \
 		integrate_pdaf.o 
 

@@ -22,7 +22,7 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   USE mod_parallel_pdaf, &    ! Parallelization
        ONLY: mype_world
-#endif
+#endif USE_PDAF
 
   IMPLICIT NONE
 
@@ -39,11 +39,11 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   ! *** Initial Screen output ***
   IF (mype_world==0) THEN
-     WRITE (*, '(/17x, a/)') '+++++ PDAF tutorial - online mode +++++'
-     WRITE (*, '(16x, a)') 'Tutorial: 2D model without parallelization'
+     WRITE (*, '(/17x, a/)') '+++++ PDAF: Modified by Shoale Badr for Cardiac Data Assimilation +++++'
+     WRITE (*, '(16x, a)') '2-D Modified Mitchell-Schaefer Model: Assimilation Phase'
      WRITE (*, '(/)')
   END IF
-#endif
+#endif USE_PDAF
 
   ! *** Initialize model ***
   CALL initialize()  
@@ -51,7 +51,7 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   ! Initialize PDAF
   CALL init_pdaf()
-#endif
+#endif USE_PDAF
 
 
 ! *****************************
@@ -65,6 +65,6 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   ! End parallelization
   CALL finalize_pdaf()
-#endif
+#endif USE_PDAF
 
 END PROGRAM MAIN
