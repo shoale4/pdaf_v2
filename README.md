@@ -13,9 +13,17 @@ To download and run:
 7. Open the `build_and_run_macos.sh` file.
 8. In lines 6 & 7 and lines 27 & 28, change the filepath to where your header file is located (should be something similar to what I have there).
 9. Now, the code is ready to run. To modify values for experimentation (more options will be added soon, such as changing parameter sets for the model),
-   you can modify line 22 to change the ensemble size (`-ens_size`), line 23 to change the observation type (`-obs_type`, see `tools/generate_ens.F90` for more info)
-   and the observation spacing (`-obs_spacing`, if observation type is uniform), and line 33 to set the number of processors (`-np`, should equal ensemble size),
-   set the ensemble size (`-dim_ens`), set output file strings (`-exp_type`, `-filter_type`, `-obs_type`), and set the filter (`-filt_type`, see `init_pdaf.F90` for more info).
+   you can edit:
+   - line 22: change the ensemble size (`-ens_size`)
+   - line 23: change the observation type (`-obs_type`, see `tools/generate_ens.F90` for more info) and
+              change the observation spacing (`-obs_spacing`, if observation type is uniform)
+   - line 33: set the number of processors (`-np`, should be equal to ensemble size),
+              set the ensemble size (`-dim_ens`),
+              set stgrings for output file:
+                `-exp_type`: experiment type, should be something like "obs_spacing"
+                `-filter_type`: filter type (e.g. "estkf", "etkf", etc.)
+                `-obs_type`: observation type (e.g. uniformly distributed observations every 8th grid point - "uniform8")
+              set the filter (`-filt_type`, see `init_pdaf.F90` for more info).
 13. In your terminal, run `chmod +x build_and_run_macos.sh` and then `./build_and_run_macos.sh`.
 14. Congrats, you've run PDAF!
 
