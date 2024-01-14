@@ -4,7 +4,7 @@ Now, PDAF can be run with just a few tweaks to this code here.
 
 To download and run:
 1. Make sure your machine has the dependencies installed listed on the PDAF website (`cmake`, `gfortran`, etc).
-2. Clone the PDAF repo (https://github.com/PDAF/PDAF).
+2. Clone the PDAF 2.0 repo: https://github.com/PDAF/PDAF/tree/PDAF_V2.0 (this is a slightly older version of PDAF now- I think they updated it within the last few months).
 3. Navigate to the `/tutorial` folder.
 4. Clone this repo into that folder and rename it whatever you'd like (mMS for example, for Modified Mitchell-Schaeffer).
 5. Create an `/outputs` folder and a `/results` folder within it.
