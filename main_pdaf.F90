@@ -22,7 +22,7 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   USE mod_parallel_pdaf, &    ! Parallelization
        ONLY: mype_world
-#endif USE_PDAF
+#endif 
 
   IMPLICIT NONE
 
@@ -43,7 +43,7 @@ PROGRAM MAIN
      WRITE (*, '(16x, a)') '2-D Modified Mitchell-Schaefer Model: Assimilation Phase'
      WRITE (*, '(/)')
   END IF
-#endif USE_PDAF
+#endif 
 
   ! *** Initialize model ***
   CALL initialize()  
@@ -51,7 +51,7 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   ! Initialize PDAF
   CALL init_pdaf()
-#endif USE_PDAF
+#endif 
 
 
 ! *****************************
@@ -65,6 +65,6 @@ PROGRAM MAIN
 #ifdef USE_PDAF
   ! End parallelization
   CALL finalize_pdaf()
-#endif USE_PDAF
+#endif 
 
 END PROGRAM MAIN

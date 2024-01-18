@@ -127,7 +127,7 @@ SUBROUTINE initialize()
       READ (11, *) h(:,i)
     END DO
   endif
-#endif USE_PDAF
+#endif 
 
 #ifdef USE_PDAF
   OPEN(11, file='outputs/for_elizabeth/v_init.txt', status='old')
@@ -139,13 +139,13 @@ SUBROUTINE initialize()
   DO i = 1, ny
     READ (11, *) h(:,i)
   END DO
-#endif USE_PDAF
+#endif 
 
 
 #ifndef USE_PDAF
   !!! CALL FUINCTION TO INITIALIZE NETCDF OUTPUT HERE !!!
   call init_netcdf(step_null, dt, nx*nx, reshape(v, (/nx*nx/)))
-#endif USE_PDAF
+#endif 
 
   
 END SUBROUTINE initialize

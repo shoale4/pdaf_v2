@@ -56,11 +56,11 @@ OBJ_USER_PDAFOMI = obs_A_pdafomi.o \
 
 # Interface to PDAF - model sided
 OBJ_PDAF_INT =  init_parallel_pdaf.o \
-		finalize_pdaf.o \
 		init_pdaf.o \
 		init_pdaf_parse.o \
 		init_pdaf_info.o \
-		assimilate_pdaf.o
+		assimilate_pdaf.o \
+		finalize_pdaf.o \
 
 # Generic user-supplied routines
 OBJ_USER_GEN =  init_ens_pdaf.o \

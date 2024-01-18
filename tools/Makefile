@@ -43,7 +43,7 @@ $(EXE_ENS) : libpdaf-d.a $(OBJ_ENS)
 all: $(EXE_GENOBS) $(EXE_ENS)
 
 .F90.o :
-	$(FC) $(OPT) $(CPP_DEFS) $(NC_INC) -c $*.F90 -I.
+	$(FC) $(OPT) $(CPP_DEFS) $(NC_INC) -c $*.F90 
 
 libpdaf-d.a: 
 	@echo "++++++ Generate Filter library ++++++"

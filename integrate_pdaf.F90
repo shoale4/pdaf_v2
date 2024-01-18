@@ -53,11 +53,11 @@ use ouput_netcdf, &
 		total_steps = spinup_time
 	end if
 	do step = 1, total_steps
-#endif USE_PDAF
+#endif 
 
 #ifdef USE_PDAF
 	do step = 1, total_steps
-#endif USE_PDAF
+#endif 
 
 
 #ifndef USE_PDAF
@@ -69,7 +69,7 @@ use ouput_netcdf, &
 			v(1:(nx/2), :) = 0
 		end if 
 	endif
-#endif USE_PDAF
+#endif 
 
 		jstim = 0
 
@@ -144,17 +144,17 @@ use ouput_netcdf, &
 			call write_netcdf(step, nx*nx, reshape(v, (/nx*nx/)))
 		end if
 	end if 
-#endif USE_PDAF
+#endif 
 
 #ifdef USE_PDAF
     call assimilate_pdaf()
-#endif USE_PDAF
+#endif 
 
   end do 
 
 #ifndef USE_PDAF
   ! Close NetCDF file
   CALL close_netcdf()
-#endif USE_PDAF
+#endif 
 
 END SUBROUTINE integrate_pdaf
