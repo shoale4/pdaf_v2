@@ -36,6 +36,28 @@ module ouput_txt
 
 		end subroutine
 
+		subroutine read_txt(filename, state_p)
+
+			implicit none
+
+			! args
+			character(len=16), intent(in) :: filename
+
+			! local vars
+			integer :: i, j
+			real(8), intent(out) :: state_p(200*200)
+
+			print *, 'I/O File Option selected: TXT'
+
+			OPEN (11, file='txt_file_data/ens_obs/'//TRIM(filename))
+			! state_p = reshape(state, (/nx, nx/))
+			! do i = 1, nx
+			read (11,*) state_p(:)
+			! end do
+			CLOSE(11)
+
+		end subroutine
+
 
 
 end module ouput_txt

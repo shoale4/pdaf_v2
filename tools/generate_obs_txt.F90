@@ -107,7 +107,7 @@ program generate_obs_txt
 
 
 		! write observations
-		call write_txt(nx*nx, reshape(state, (/nx*nx/)), 'obs_'//TRIM(filename))
+		call write_txt(nx*nx, reshape(observations, (/nx*nx/)), 'obs_'//TRIM(filename))
 
         ! print *, observations
 

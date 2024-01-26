@@ -166,7 +166,9 @@ CONTAINS
     USE mod_assimilation, &
          ONLY: filtertype, local_range
     USE mod_model, &
-         ONLY: nx, ny
+         ONLY: nx, ny, file_output_choice
+    use ouput_txt, &
+         only: read_txt
 
     IMPLICIT NONE
 
@@ -192,6 +194,7 @@ CONTAINS
     integer :: cnt_obs=0, obs_ind
     integer :: dim_state_obs
     character(len=10) :: obs_file
+    character(len=6) :: stepstr
 
 
 ! *********************************************
@@ -215,49 +218,61 @@ CONTAINS
 ! **********************************
 ! *** Read PE-local observations ***
 ! **********************************
-    obs_file = 'obs.nc'
-    j = 1
-    stat(j) = NF90_OPEN(TRIM(obs_file), NF90_NOWRITE, file_id) 
-  
-    ! read number of time steps
-    j = j + 1
-    stat(j) = NF90_INQ_DIMID(file_id, 'time_steps', step_id)
-    j = j + 1
-    stat(j) = NF90_Inquire_dimension(file_id, step_id, len=nsteps_file)
-    ! read time step info
-    j = j + 1
-    stat(j) = NF90_INQ_VARID(file_id, 'step', step_id)
-  
-  
-    ! initialize obs interval
-    delt_obs = 5    ! fine hardcoded for now but needs to be made dynamic (shoale 2/27)
-  
-    ! read observations
-    ! dim_obs = nx*nx
-    dim_state_obs = nx*nx
-    allocate(obs_arr(dim_state_obs))
-  
-    j = 1
-    stat(j) = NF90_INQ_VARID(file_id, 'obs', obs_id)
-  
-    pos(2) = int(step / delt_obs)
-    cnt_(2) = 1
-    pos(1) = 1
-    cnt_(1) = dim_state_obs
-    j = j + 1
-    stat(j) = NF90_GET_VAR(file_id, obs_id, obs_arr(:), start=pos, count=cnt_)
-    ! print *, obs_arr
-    if (stat(j) /= NF90_noerr) then
-      write (*,*) "NETCDF ERROR READING OBSERVATIONS, STAT LINE ", j 
-    end if
+    
+    if (file_output_choice .eq. 0) then
 
-    j = j + 1
-    stat(j) = NF90_CLOSE(file_id)
+        obs_file = 'obs.nc'
+        j = 1
+        stat(j) = NF90_OPEN(TRIM(obs_file), NF90_NOWRITE, file_id) 
+      
+        ! read number of time steps
+        j = j + 1
+        stat(j) = NF90_INQ_DIMID(file_id, 'time_steps', step_id)
+        j = j + 1
+        stat(j) = NF90_Inquire_dimension(file_id, step_id, len=nsteps_file)
+        ! read time step info
+        j = j + 1
+        stat(j) = NF90_INQ_VARID(file_id, 'step', step_id)
+      
+      
+        ! initialize obs interval
+        delt_obs = 5    ! fine hardcoded for now but needs to be made dynamic (shoale 2/27)
+      
+        ! read observations
+        ! dim_obs = nx*nx
+        dim_state_obs = nx*nx
+        allocate(obs_arr(dim_state_obs))
+      
+        j = 1
+        stat(j) = NF90_INQ_VARID(file_id, 'obs', obs_id)
+      
+        pos(2) = int(step / delt_obs)
+        cnt_(2) = 1
+        pos(1) = 1
+        cnt_(1) = dim_state_obs
+        j = j + 1
+        stat(j) = NF90_GET_VAR(file_id, obs_id, obs_arr(:), start=pos, count=cnt_)
+        ! print *, obs_arr
+        if (stat(j) /= NF90_noerr) then
+          write (*,*) "NETCDF ERROR READING OBSERVATIONS, STAT LINE ", j 
+        end if
+
+        j = j + 1
+        stat(j) = NF90_CLOSE(file_id)
+
+    else if (file_output_choice .eq. 1) then
+
+        allocate(obs_arr(nx*nx))
+        write(stepstr, "(I0)") step
+        call read_txt('obs_'//trim(stepstr), obs_arr(:))
+
+    end if
 
 ! ***********************************************************
 ! *** Count available observations for the process domain ***
 ! *** and initialize index and coordinate arrays.         ***
 ! ***********************************************************
+
 
     ! *** Count valid observations that lie within the process sub-domain ***
     obs_reshaped = reshape(obs_arr, (/nx,nx/))
