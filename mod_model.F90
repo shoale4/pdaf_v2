@@ -38,5 +38,6 @@ MODULE mod_model
   integer :: spinup_time      ! new sb 9/6/23 -- time (ms) to wait for model to spin-up before writing states to file
   integer :: model_start   ! new sb for spinup phase
   integer :: spinup_phase  ! new sb 1/9/24 for spinup phase (0 or 1 to produce init files vs. netcdf file)
+  integer :: file_output_choice ! new sb 1/23/24 update so that pdaf can run with txt files again rather than netcdf files
   
 END MODULE mod_model

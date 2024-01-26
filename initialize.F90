@@ -19,7 +19,7 @@ SUBROUTINE initialize()
       nsteps, nstimdur, d_to_dx2, nspiraltime, log1, logint1, jin, jout, dv, dh, xlap, jstim, &
       xlap1, xlap2, intpdaf1, intpdaf2, init1, init2, obs, intpdaf1, intpdaf2, step_null, & 
       tau_in, tau_out, tau_open, tau_close, v_gate, v_stim, dx, diff, rmse_arr, rmse_spread, ass_step, &
-      spinup_time, model_start, spinup_phase
+      spinup_time, model_start, spinup_phase, file_output_choice
 
   ! USE mod_assimilation, &
       ! ONLY: delt_obs
@@ -110,6 +110,9 @@ SUBROUTINE initialize()
   handle = 'spinup'
   CALL parse(handle, spinup_phase)
   ! READ(TRIM(spinup_option), *) spinup_phase
+  file_output_choice = 1
+  handle = 'fout_choice'
+  call parse(handle, file_output_choice)
 
 
 #ifndef USE_PDAF
@@ -144,7 +147,9 @@ SUBROUTINE initialize()
 
 #ifndef USE_PDAF
   !!! CALL FUINCTION TO INITIALIZE NETCDF OUTPUT HERE !!!
-  call init_netcdf(step_null, dt, nx*nx, reshape(v, (/nx*nx/)))
+  if (file_output_choice .eq. 0) then
+    call init_netcdf(step_null, dt, nx*nx, reshape(v, (/nx*nx/)))
+  end if
 #endif 
 
   

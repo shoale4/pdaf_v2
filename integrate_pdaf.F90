@@ -21,7 +21,8 @@ SUBROUTINE integrate_pdaf()
       obs, tau_in, tau_out, tau_open, tau_close, v_gate, v_stim, endtime, stim_dur, spiraltime, dx, diff, &
       total_steps, nsteps, nstimdur, d_to_dx2, nspiraltime, log1, logint1, jin, jout, dv, dh, xlap, jstim, &
       xlap1, xlap2, intpdaf1, intpdaf2, init1, init2, obs, intpdaf1, intpdaf2, & 
-      tau_in, tau_out, tau_open, tau_close, v_gate, v_stim, dx, diff, spinup_time, model_start, spinup_phase
+      tau_in, tau_out, tau_open, tau_close, v_gate, v_stim, dx, diff, spinup_time, model_start, spinup_phase, &
+      file_output_choice
   ! USE mod_model
 
 !   USE mod_parallel_pdaf, &  ! Parallelization variables
@@ -30,10 +31,14 @@ SUBROUTINE integrate_pdaf()
 use ouput_netcdf, &
 	   only: write_netcdf, close_netcdf
 
+use ouput_txt, &
+		 only: write_txt
+
   IMPLICIT NONE
 
 ! *** local variables ***
   INTEGER :: step, k, count, i, j      ! Counters
+  character(len=16) :: filename
 !   CHARACTER(len=5) :: stepstr  ! String for time step
 
 ! #ifdef USE_PDAF
@@ -130,18 +135,24 @@ use ouput_netcdf, &
 		  DO i = 1, nx
 		     WRITE (11, *) v(i, :)
 		  END DO
+		  close(11)
 
 		  OPEN(12, file = 'outputs/for_elizabeth/h_init.txt')
 		  DO i = 1, nx
 		     WRITE (12, *) h(i, :)
 		  END DO
+		  close(12)
 		end if
 	elseif (spinup_phase .eq. 1) then
 		! netcdf file output
 		if (mod(step, 5) == 0) then
 			write (*,*) "writing state @ time step: ", step 
-			! write (*,*) v(:,:)
-			call write_netcdf(step, nx*nx, reshape(v, (/nx*nx/)))
+			if (file_output_choice .eq. 0) then
+				call write_netcdf(step, nx*nx, reshape(v, (/nx*nx/)))
+			else if (file_output_choice .eq. 1) then
+				write(filename, "(I0)") step
+				call write_txt(nx*nx, reshape(v, (/nx*nx/)), trim(filename))
+			end if
 		end if
 	end if 
 #endif 
@@ -154,7 +165,9 @@ use ouput_netcdf, &
 
 #ifndef USE_PDAF
   ! Close NetCDF file
-  CALL close_netcdf()
+  if (file_output_choice .eq. 0) then
+  	CALL close_netcdf()
+  end if
 #endif 
 
 END SUBROUTINE integrate_pdaf

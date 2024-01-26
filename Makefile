@@ -32,10 +32,11 @@ include $(BASEDIR)/make.arch/$(PDAF_ARCH).h
 # Modules used for the model part
 MODULES =  	mod_model.o \
 			ouput_netcdf.o \
+			ouput_txt.o \
 			parser_no_mpi.o
 
 # Model routines
-OBJ_MODEL =	main.o\
+OBJ_MODEL =	main.o \
 		initialize.o \
 		integrate_pdaf.o 
 
