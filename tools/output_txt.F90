@@ -27,10 +27,10 @@ module output_txt
 			print *, 'I/O File Option selected: TXT'
 
 
-			OPEN (11, file='../txt_file_data/ens_obs/'//trim(filename))
+			OPEN (11, file='../txt_file_data/ens_obs/'//trim(filename), form='unformatted')
 			! state_p = reshape(state, (/nx, nx/))
 			! do i = 1, nx
-			write (11,*) state(:)
+			write (11) state(:)
 			! end do
 			close(11)
 				
@@ -50,9 +50,9 @@ module output_txt
 			real(8), intent(out) :: state_p(200*200)
 
 
-			OPEN (11, file=TRIM('../txt_file_data/state_step_'//TRIM(filename)))
+			OPEN (11, file='../txt_file_data/state_step_'//TRIM(filename), form='unformatted')
 			! do i = 1, nx
-			READ(11,*) state_p(:)
+			READ(11) state_p(:)
 			! end do
 			close(11)
 				

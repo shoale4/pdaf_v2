@@ -131,15 +131,15 @@ use ouput_txt, &
 	if (spinup_phase .eq. 0) then
 		if (step == spinup_time) then
 			! initial file output for spin-up cases (new sb 9/18/23)
-		  OPEN(11, file = 'outputs/for_elizabeth/v_init.txt')
+		  OPEN(11, file = 'outputs/for_elizabeth/v_init', form='unformatted')
 		  DO i = 1, nx
-		     WRITE (11, *) v(i, :)
+		     WRITE (11) v(i, :)
 		  END DO
 		  close(11)
 
-		  OPEN(12, file = 'outputs/for_elizabeth/h_init.txt')
+		  OPEN(12, file = 'outputs/for_elizabeth/h_init', form='unformatted')
 		  DO i = 1, nx
-		     WRITE (12, *) h(i, :)
+		     WRITE (12) h(i, :)
 		  END DO
 		  close(12)
 		end if

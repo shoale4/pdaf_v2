@@ -11,8 +11,6 @@ fi
 make clean
 make model
 ./model -spinup 0 -fout_choice $(fout_choice)
-make clean
-make model
 ./model -spinup 1 -fout_choice $(fout_choice)
 
 
