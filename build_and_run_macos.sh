@@ -2,7 +2,7 @@
 
 export PDAF_ARCH=macos_gfortran_openmpi
 export makefilepath="/Users/shoale/PDAF-heart-ms_v3/PDAF_V2.0/make.arch/macos_gfortran_openmpi.h"
-echo $makefilepath
+export fout_choice=1
 
 ######## GENERATE INIT FILES + NETCDF STATE FILE ########
 if grep -q "\-DUSE_PDAF" $makefilepath; then
@@ -10,10 +10,10 @@ if grep -q "\-DUSE_PDAF" $makefilepath; then
 fi
 make clean
 make model
-./model -spinup 0
+./model -spinup 0 -fout_choice $(fout_choice)
 make clean
 make model
-./model -spinup 1
+./model -spinup 1 -fout_choice $(fout_choice)
 
 
 ######## GENERATE ENSEMBLE AND OBSERVATIONS ########
@@ -33,5 +33,5 @@ fi
 cd ..
 make clean
 make model_pdaf
-mpirun -np 4 ./model_pdaf -dim_ens 4 -exp_type obs_spacing_exp -filt_type 5 -filter_type letkf -obs_type uniform6 
+mpirun -np 4 ./model_pdaf -dim_ens 4 -exp_type obs_spacing_exp -filt_type 5 -filter_type letkf -obs_type uniform6 -fout_choice $(fout_choice)
 # srun -n 10 ./model_pdaf -dim_ens 10 -exp_type obs_spacing_exp -filt_type 6 -filter_type estkf -obs_type uniform6
