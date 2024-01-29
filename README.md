@@ -12,7 +12,7 @@ To download and run:
 7. Open `prepoststep_ens_pdaf.F90` and find lines 332 and 351 (variable name `filename`). Change `'results/for_elizabeth/jan_2024/rmserror_'` to just `'results/rmserror_'`  and `'results/for_elizabeth/jan_2024/spread_'` to just `'results/spread_'`.
 8. Open the `build_and_run_macos.sh` file.
 9. In lines 6 & 7 and lines 27 & 28, change `makefilepath` to the path that your PDAF header file is located (should be something similar to what I have there).
-10. Now, the code is ready to run. To modify values for experimentation (more options will be added soon, such as changing parameter sets for the model),
+10. To modify values for experimentation (more options will be added soon, such as changing parameter sets for the model),
    you can edit:
    - line 22: change the ensemble size (`-ens_size`) 
    - line 23: change the observation type (`-obs_type`, see `tools/generate_ens.F90` for more info)
