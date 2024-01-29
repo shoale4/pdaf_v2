@@ -32,4 +32,3 @@ cd ..
 make clean
 make model_pdaf
 mpirun -np 4 ./model_pdaf -dim_ens 4 -exp_type obs_spacing_exp -filt_type 5 -filter_type letkf -obs_type uniform6 -fout_choice $(fout_choice)
-# srun -n 10 ./model_pdaf -dim_ens 10 -exp_type obs_spacing_exp -filt_type 6 -filter_type estkf -obs_type uniform6
