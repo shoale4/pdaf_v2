@@ -24,11 +24,12 @@ To download and run:
                 - `-filter_type`: filter type (e.g. "estkf", "etkf", etc.)
                 - `-obs_type`: observation type (e.g. uniformly distributed observations every 8th grid point - e.g. "uniform8")
               set the filter (`-filt_type`, see `init_pdaf.F90` for more info).
-11. Set `fout_choice` to 0 for netCDF file I/O or 1 for txt file I/O. This tells the system to use txt files.
-12. Find the header file for which you specified the file path for in step 9. In the last line,
+11. Open your PDAF header file (`macos_gfortran_openmpi.h` for example).
+12. Set `fout_choice` to 0 for netCDF file I/O or 1 for txt file I/O. This tells the system to use txt files.
+13. Find the header file for which you specified the file path for in step 9. In the last line,
      set `FILEOUT_FLAG` to 0 for netCDF file I/O or 1 for txt file I/O.  This tells PDAF to use txt files. 
-13. In your terminal, run `chmod +x build_and_run_macos.sh` and then `./build_and_run_macos.sh`.
-14. Congrats, you've run PDAF!
+14. In your terminal, run `chmod +x build_and_run_macos.sh` and then `./build_and_run_macos.sh`.
+15. Congrats, you've run PDAF!
 
 
 
