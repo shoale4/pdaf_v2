@@ -14,15 +14,15 @@ To download and run:
 9. In lines 6 & 7 and lines 27 & 28, change the filepath to where your header file is located (should be something similar to what I have there).
 10. Now, the code is ready to run. To modify values for experimentation (more options will be added soon, such as changing parameter sets for the model),
    you can edit:
-   - line 22: change the ensemble size (`-ens_size`) `\n`
+   - line 22: change the ensemble size (`-ens_size`) 
    - line 23: change the observation type (`-obs_type`, see `tools/generate_ens.F90` for more info)
               change the observation spacing (`-obs_spacing`, if observation type is uniform)
    - line 33: set the number of processors (`-np`, should be equal to ensemble size)  
               set the ensemble size (`-dim_ens`),
-              set stgrings for output file: 
+              set strings for results files: 
                 - `-exp_type`: experiment type, should be something like "obs_spacing"
                 - `-filter_type`: filter type (e.g. "estkf", "etkf", etc.)
-                - `-obs_type`: observation type (e.g. uniformly distributed observations every 8th grid point - "uniform8")
+                - `-obs_type`: observation type (e.g. uniformly distributed observations every 8th grid point - e.g. "uniform8")
               set the filter (`-filt_type`, see `init_pdaf.F90` for more info).
 11. Set `fout_choice` to 0 for netCDF file I/O or 1 for txt file I/O. This tells the system to use txt files.
 12. Find the header file for which you specified the file path for in step 9. In the last line,
